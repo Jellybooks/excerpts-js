@@ -1,0 +1,33 @@
+{
+  "name": "peek-inside-js",
+  "version": "1.0.0",
+  "description": "A small script to create modals to peek inside samples",
+  "main": "peek-inside.js",
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "build:dev": "webpack --config webpack.dev.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf node_modules dev"
+  },
+  "author": "Jellybooks",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/jsdom": "^16.2.5",
+    "@types/parse5": "^5.0.3",
+    "babel-loader": "^8.2.2",
+    "jsdom": "^16.4.0",
+    "rimraf": "^3.0.2",
+    "source-map-loader": "^1.1.3",
+    "typescript": "^4.1.3",
+    "webpack": "^5.10.3",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "core-js": "^3.8.1"
+  }
+}
