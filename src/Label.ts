@@ -36,21 +36,26 @@ export class Label {
 
   private create() {
     this.elements.forEach(img => {
+      // TODO: Label attributes + placement
+
       const label = Utils.createElement("div", {
         "id": "jb-peek-label",
         "class": "jb-peek-label"
       });
-  
+
+      const peekText: string = img.getAttribute(DefaultConfig.PREVIEW_TEXT_ATTR) || this.text;
+
       const labelText = Utils.createElement("span", {
         "id": "jb-peek-label-text",
         "class": "jb-peek-label-text"
-      }, this.text);
+      }, peekText);
   
       label.appendChild(labelText);
       img.parentElement?.appendChild(label);
     });
   }
 
+  // TODO: Refacto to make it easier to re-use
   private handlePlacementConfig(placement?: string | IPlacementObject): IPlacementObject {
     let result: IPlacementObject = DefaultConfig.PLACEMENT_OBJECT;
     if (placement) {
