@@ -48,8 +48,7 @@ export class Modal {
       "id": "jb-modal-close",
       "class": "jb-modal-close",
       "aria-label": "Close Excerpt"
-    });
-    this.closeButton.textContent = "x";
+    }, "x");
 
     this.overlay = Utils.createElement("div", {
       "id": "jb-modal-overlay",

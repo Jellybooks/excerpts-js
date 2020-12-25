@@ -9,6 +9,7 @@ export class DefaultConfig {
   public static readonly PLACEMENT_X_ATTR: string = "data-jb-peek-placement-x";
   public static readonly PLACEMENT_Y_ATTR: string = "data-jb-peek-placement-y";
 
+  public static readonly PEEK_TEXT: string = "Peek Inside";
   public static readonly PLACEMENT_OBJECT: IPlacementObject = {
     x: "right",
     y: "top"

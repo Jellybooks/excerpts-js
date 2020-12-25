@@ -5,8 +5,7 @@ export class Styling {
     const stylesheet = Utils.createElement("style", {
       "id": "jb-modal-stylesheet",
       "type": "text/css"
-    });
-    stylesheet.textContent = `#jb-modal {
+    }, `#jb-modal {
       z-index: 99999;
       left: 10%;
       top: 10vh;
@@ -37,7 +36,7 @@ export class Styling {
       background-color: white;
       border: 1px solid #666;
     }
-    `;
+    `);
     return stylesheet;
   }
 }
