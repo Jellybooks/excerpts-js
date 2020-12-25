@@ -20,4 +20,8 @@ export class Label {
   constructor(config: ILabelConfig) {
 
   }
+
+  private create() {
+    
+  }
 }

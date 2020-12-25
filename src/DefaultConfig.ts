@@ -14,5 +14,5 @@ export class DefaultConfig {
     y: "top"
   }
 
-  public static readonly MOBILE_QUERY: string = "(min-width: 768px)";
+  public static readonly MOBILE_QUERY: string = "(max-width: 768px)";
 }
