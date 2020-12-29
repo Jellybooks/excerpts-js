@@ -16,13 +16,13 @@ export interface ILabelConfig {
 }
 
 export class Label {
-  private placement: IPlacementObject;
+  private globalPlacement: IPlacementObject;
   private text: string;
 
   private elements: NodeListOf<HTMLImageElement>;
 
   constructor(config: ILabelConfig) {
-    this.placement = this.handlePlacementConfig(config.placement);
+    this.globalPlacement = this.handleGlobalPlacement(config.placement);
     this.text = config.text || DefaultConfig.PEEK_TEXT;
 
     if (config.selector) {
@@ -36,11 +36,16 @@ export class Label {
 
   private create() {
     this.elements.forEach(img => {
-      // TODO: Label attributes + placement
+      let peekPlacement: IPlacementObject = this.globalPlacement; 
+      const placementAttr = this.checkPlacementAttr(img);
+      if (placementAttr !== null) {
+        peekPlacement.x = placementAttr.x;
+        peekPlacement.y = placementAttr.y;
+      }
 
       const label = Utils.createElement("div", {
         "id": "jb-peek-label",
-        "class": "jb-peek-label"
+        "class": `jb-peek-label ${peekPlacement.x} ${peekPlacement.y}`
       });
 
       const peekText: string = img.getAttribute(DefaultConfig.PREVIEW_TEXT_ATTR) || this.text;
@@ -55,19 +60,16 @@ export class Label {
     });
   }
 
-  // TODO: Refacto to make it easier to re-use
-  private handlePlacementConfig(placement?: string | IPlacementObject): IPlacementObject {
+  // TODO: Refacto to make it cleaner
+  private handleGlobalPlacement(placement?: string | IPlacementObject): IPlacementObject {
     let result: IPlacementObject = DefaultConfig.PLACEMENT_OBJECT;
     if (placement) {
       if (typeof placement === "string") {
-        const values = Utils.splitAttr(placement);
-        values.forEach((value) => {
-          if (value === "left" || value === "center" || value === "right") {
-            result.x = value;
-          } else if (value === "top" || value === "bottom") {
-            result.y = value;
-          }
-        })
+        const convertedPlacement = this.convertStringPlacement(placement);
+        if (convertedPlacement !== null) {
+          result.x = convertedPlacement.x;
+          result.y = convertedPlacement.y;
+        }
       } else {
         if (placement.x === "left" || placement.x === "center" || placement.x === "right") {
           result.x = placement.x;
@@ -78,5 +80,39 @@ export class Label {
       }
     }
     return result;
+  }
+
+  private convertStringPlacement(placement: string): IPlacementObject | null {
+    const values = Utils.splitAttr(placement);
+    if (values.size === 2) {
+      let placementX, placementY;
+      values.forEach((value) => {
+        if (value === "left" || value === "center" || value === "right") {
+          placementX = value;
+        } else if (value === "top" || value === "bottom") {
+          placementY = value;
+        }
+      });
+      if (placementX && placementY) {
+        return {x: placementX, y: placementY};
+      }
+    }
+    
+    return null;
+  }
+
+  private checkPlacementAttr(img: HTMLImageElement): IPlacementObject | null {
+    if (img.hasAttribute(DefaultConfig.PLACEMENT_ATTR)) {
+      const placement = img.getAttribute(DefaultConfig.PLACEMENT_ATTR) as string;
+      const convertedPlacement = this.convertStringPlacement(placement);
+      if (convertedPlacement !== null) {
+        return {
+          x: convertedPlacement.x,
+          y: convertedPlacement.y
+        }
+      }
+    }
+
+    return null;
   }
 }
