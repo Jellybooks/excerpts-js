@@ -59,7 +59,7 @@ export class Modal {
     }) as HTMLDivElement;
 
     this.iframe = Utils.createElement("iframe", {
-      "src": "_blank",
+      "src": "about:blank",
     }) as HTMLIFrameElement;
 
     this.modal.appendChild(this.closeButton);
