@@ -6,16 +6,7 @@ interface IOptions {
   modal?: IModalConfig;
 }
 
-export default class {
-  protected label: Label;
-  protected modal: Modal;
-
-  constructor(config?: IOptions) {
-    this.label = new Label(config?.peek);
-    this.modal = new Modal(config?.modal);
-  }
-
-  public static init(config?: IOptions) {
-    return new this(config);
-  }
+export const init = (config?: IOptions) => {
+  new Label(config?.peek);
+  new Modal(config?.modal);
 }
