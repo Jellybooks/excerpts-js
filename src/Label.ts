@@ -43,6 +43,11 @@ export class Label {
         peekPlacement.y = placementAttr.y;
       }
 
+      const container = Utils.createElement("div", {
+        "id": "jb-peek-container",
+        "class": "jb-peek-container"
+      });
+
       const label = Utils.createElement("div", {
         "id": "jb-peek-label",
         "class": `jb-peek-label ${peekPlacement.x} ${peekPlacement.y}`
@@ -56,7 +61,10 @@ export class Label {
       }, peekText);
   
       label.appendChild(labelText);
-      img.parentElement?.appendChild(label);
+
+      img.parentNode?.insertBefore(container, img);
+      container.appendChild(img);
+      container.appendChild(label);
     });
   }
 
