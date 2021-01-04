@@ -21,11 +21,11 @@ export class Label {
 
   private elements: NodeListOf<HTMLImageElement>;
 
-  constructor(config: ILabelConfig) {
-    this.globalPlacement = this.handleGlobalPlacement(config.placement);
-    this.text = config.text || DefaultConfig.PEEK_TEXT;
+  constructor(config?: ILabelConfig) {
+    this.globalPlacement = this.handleGlobalPlacement(config?.placement);
+    this.text = config?.text || DefaultConfig.PEEK_TEXT;
 
-    if (config.selector) {
+    if (config?.selector) {
       this.elements = document.querySelectorAll(config.selector);
     } else {
       this.elements = document.querySelectorAll(DefaultConfig.LABEL_SELECTOR)

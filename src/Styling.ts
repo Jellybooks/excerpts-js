@@ -1,7 +1,7 @@
 import * as Utils from "./Utils";
 
 export class Styling {
-  public static init(): HTMLElement {
+  public static init(): HTMLStyleElement {
     const stylesheet = Utils.createElement("style", {
       "id": "jb-modal-stylesheet",
       "type": "text/css"
@@ -12,6 +12,9 @@ export class Styling {
       width: 80%;
       height: 80vh;
       position: fixed;
+    }
+    .jb-modal-hidden {
+      display: none;
     }
     #jb-modal-close {
       position: absolute;
@@ -36,7 +39,7 @@ export class Styling {
       background-color: white;
       border: 1px solid #666;
     }
-    `);
+    `) as HTMLStyleElement;
     return stylesheet;
   }
 }

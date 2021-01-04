@@ -13,16 +13,16 @@ export class Modal {
 
   private elements: NodeListOf<HTMLAnchorElement>;
 
-  private stylesheet: HTMLElement | null = null;
-  private modal: HTMLElement | null = null;
-  private closeButton: HTMLElement | null = null;
-  private overlay: HTMLElement | null = null;
-  private iframe: HTMLElement | null = null;
+  private stylesheet: HTMLStyleElement | null = null;
+  private modal: HTMLDivElement | null = null;
+  private closeButton: HTMLButtonElement | null = null;
+  private overlay: HTMLDivElement | null = null;
+  private iframe: HTMLIFrameElement | null = null;
 
-  constructor(config: IModalConfig) {
-    this.showOnMobile = config.showOnMobile || false;
+  constructor(config?: IModalConfig) {
+    this.showOnMobile = config?.showOnMobile || false;
     
-    if (config.selector) {
+    if (config?.selector) {
       this.elements = document.querySelectorAll(config.selector);
     } else {
       this.elements = document.querySelectorAll(DefaultConfig.MODAL_SELECTOR);
@@ -38,27 +38,29 @@ export class Modal {
 
     this.modal = Utils.createElement("div", {
       "id": "jb-modal",
-      "class": "jb-modal",
+      "class": "jb-modal jb-modal-hidden",
       "role": "dialog",
-      "aria-label": "excerpt"
-    });
+      "aria-label": "excerpt",
+      "aria-hidden": "true",
+      "hidden": "true"
+    }) as HTMLDivElement;
 
     this.closeButton = Utils.createElement("button", {
       "type": "button",
       "id": "jb-modal-close",
       "class": "jb-modal-close",
       "aria-label": "Close Excerpt"
-    }, "x");
+    }, "x") as HTMLButtonElement;
 
     this.overlay = Utils.createElement("div", {
       "id": "jb-modal-overlay",
       "class": "jb-modal-overlay",
       "tabindex": "-1"
-    });
+    }) as HTMLDivElement;
 
     this.iframe = Utils.createElement("iframe", {
       "src": "_blank",
-    });
+    }) as HTMLIFrameElement;
 
     this.modal.appendChild(this.closeButton);
     this.modal.appendChild(this.iframe);
@@ -76,12 +78,26 @@ export class Modal {
     this.handleMobileQuery();
   }
 
-  private open(event: Event): void {
-    
+  private open(event: MouseEvent): void {
+    if (this.isMobile && !this.showOnMobile) {
+      return;
+    }
+    const target = event.target as HTMLAnchorElement;
+    if (this.iframe && target.href) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      this.iframe.src = target.href;
+      this.modal?.classList.remove("jb-modal-hidden");
+      this.modal?.removeAttribute("aria-hidden");
+      this.modal?.removeAttribute("hidden");
+    }
   }
 
   private close(): void {
-
+    this.modal?.classList.add("jb-modal-hidden");
+    this.modal?.setAttribute("aria-hidden", "true");
+    this.modal?.setAttribute("hidden", "true");
   }
 
   private handleMobileQuery(): void {
