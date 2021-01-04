@@ -14,6 +14,7 @@ export class Modal {
   private elements: NodeListOf<HTMLAnchorElement>;
 
   private stylesheet: HTMLStyleElement | null = null;
+  private modalContainer: HTMLDivElement | null = null;
   private modal: HTMLDivElement | null = null;
   private closeButton: HTMLButtonElement | null = null;
   private overlay: HTMLDivElement | null = null;
@@ -36,13 +37,18 @@ export class Modal {
     this.stylesheet = Styling.init();
     document.head.appendChild(this.stylesheet);
 
+    this.modalContainer = Utils.createElement("div", {
+      "id": "jb-modal-container",
+      "class": "jb-modal-container jb-modal-hidden",
+      "hidden": "true"
+    }) as HTMLDivElement;
+
     this.modal = Utils.createElement("div", {
       "id": "jb-modal",
-      "class": "jb-modal jb-modal-hidden",
+      "class": "jb-modal",
       "role": "dialog",
       "aria-label": "excerpt",
-      "aria-hidden": "true",
-      "hidden": "true"
+      "aria-hidden": "true"
     }) as HTMLDivElement;
 
     this.closeButton = Utils.createElement("button", {
@@ -65,8 +71,10 @@ export class Modal {
     this.modal.appendChild(this.closeButton);
     this.modal.appendChild(this.iframe);
 
-    document.body.appendChild(this.modal);
-    document.body.appendChild(this.overlay);
+    this.modalContainer.appendChild(this.modal);
+    this.modalContainer.appendChild(this.overlay);
+
+    document.body.appendChild(this.modalContainer)
   }
 
   private setupEvents(): void {
@@ -88,16 +96,16 @@ export class Modal {
       event.stopPropagation();
 
       this.iframe.src = target.href;
-      this.modal?.classList.remove("jb-modal-hidden");
+      this.modalContainer?.classList.remove("jb-modal-hidden");
+      this.modalContainer?.removeAttribute("hidden");
       this.modal?.removeAttribute("aria-hidden");
-      this.modal?.removeAttribute("hidden");
     }
   }
 
   private close(): void {
-    this.modal?.classList.add("jb-modal-hidden");
+    this.modalContainer?.classList.add("jb-modal-hidden");
+    this.modalContainer?.setAttribute("hidden", "true");
     this.modal?.setAttribute("aria-hidden", "true");
-    this.modal?.setAttribute("hidden", "true");
   }
 
   private handleMobileQuery(): void {
