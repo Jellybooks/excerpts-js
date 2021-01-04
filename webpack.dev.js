@@ -21,6 +21,10 @@ const legacyConfig = {
       { 
         test: /\.(ts|js)?$/, 
         loader: "babel-loader",
+        exclude: [
+          /\bcore-js\b/,
+          /\bwebpack\/buildin\b/
+        ],
         options: {
           envName: "legacy" // Points to env.legacy in babel.config.js
         }
@@ -47,6 +51,10 @@ const modernConfig = {
     rules: [
       { 
         test: /\.(ts|js)?$/,
+        exclude: [
+          /\bcore-js\b/,
+          /\bwebpack\/buildin\b/
+        ],
         loader: "babel-loader",
         options: {
           envName: "modern" // Points to env.modern in babel.config.js
