@@ -1,5 +1,6 @@
 import * as Utils from "./Utils";
 
+// TODO: Move to CSS file so that it’s easier to customize/override?
 export class Styling {
   public static init(): HTMLStyleElement {
     const stylesheet = Utils.createElement("style", {
