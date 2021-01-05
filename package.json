@@ -4,8 +4,8 @@
   "description": "A small script to create modals to peek inside samples",
   "main": "peek-inside.js",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
-    "build:dev": "webpack --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js && cpx src/peek-inside.css dist/",
+    "build:dev": "webpack --config webpack.dev.js && cpx src/peek-inside.css dev/",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf node_modules dev"
   },
@@ -20,6 +20,7 @@
     "@types/jsdom": "^16.2.5",
     "@types/parse5": "^5.0.3",
     "babel-loader": "^8.2.2",
+    "cpx": "^1.5.0",
     "jsdom": "^16.4.0",
     "rimraf": "^3.0.2",
     "source-map-loader": "^1.1.3",
