@@ -40,8 +40,7 @@ module.exports = {
               "chrome": "86",
               "edge": "87",
               "firefox": "83",
-              "ios": "12",
-              "samsung": "12"
+              "ios": "12"
             },
             useBuiltIns: "usage",
             corejs: {
