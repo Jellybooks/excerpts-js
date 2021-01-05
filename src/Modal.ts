@@ -1,5 +1,4 @@
 import { DefaultConfig } from "./DefaultConfig";
-import { Styling } from "./Styling";
 import * as Utils from "./Utils";
 
 export interface IModalConfig {
@@ -13,7 +12,6 @@ export class Modal {
 
   private elements: NodeListOf<HTMLAnchorElement>;
 
-  private stylesheet: HTMLStyleElement | null = null;
   private modalContainer: HTMLDivElement | null = null;
   private modal: HTMLDivElement | null = null;
   private closeButton: HTMLButtonElement | null = null;
@@ -33,10 +31,7 @@ export class Modal {
     this.setupEvents();
   }
 
-  private create(): void {    
-    this.stylesheet = Styling.init();
-    document.head.appendChild(this.stylesheet);
-
+  private create(): void {
     this.modalContainer = Utils.createElement("div", {
       "id": "jb-modal-container",
       "class": "jb-modal-container jb-modal-hidden",
