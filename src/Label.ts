@@ -44,19 +44,16 @@ export class Label {
       }
 
       const container = Utils.createElement("div", {
-        "id": "jb-peek-container",
         "class": "jb-peek-container"
       });
 
       const label = Utils.createElement("div", {
-        "id": "jb-peek-label",
         "class": `jb-peek-label ${peekPlacement.x} ${peekPlacement.y}`
       });
 
       const peekText: string = img.getAttribute(DefaultConfig.PREVIEW_TEXT_ATTR) || this.text;
 
       const labelText = Utils.createElement("span", {
-        "id": "jb-peek-label-text",
         "class": "jb-peek-label-text"
       }, peekText);
   

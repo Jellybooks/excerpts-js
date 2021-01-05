@@ -33,13 +33,11 @@ export class Modal {
 
   private create(): void {
     this.modalContainer = Utils.createElement("div", {
-      "id": "jb-modal-container",
       "class": "jb-modal-container jb-modal-hidden",
       "hidden": "true"
     }) as HTMLDivElement;
 
     this.modal = Utils.createElement("div", {
-      "id": "jb-modal",
       "class": "jb-modal",
       "role": "dialog",
       "aria-label": "excerpt",
@@ -48,13 +46,11 @@ export class Modal {
 
     this.closeButton = Utils.createElement("button", {
       "type": "button",
-      "id": "jb-modal-close",
       "class": "jb-modal-close",
       "aria-label": "Close Excerpt"
     }, "x") as HTMLButtonElement;
 
     this.overlay = Utils.createElement("div", {
-      "id": "jb-modal-overlay",
       "class": "jb-modal-overlay",
       "tabindex": "-1"
     }) as HTMLDivElement;
