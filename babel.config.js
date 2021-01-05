@@ -37,11 +37,11 @@ module.exports = {
             // in each TS file, and for which targets
             debug: false,
             targets: {
-              "chrome": "70",
-              "edge": "18",
-              "firefox": "69",
-              "ios": "10.3",
-              "samsung": "6.2"
+              "chrome": "86",
+              "edge": "87",
+              "firefox": "83",
+              "ios": "12",
+              "samsung": "12"
             },
             useBuiltIns: "usage",
             corejs: {
