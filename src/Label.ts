@@ -44,7 +44,8 @@ export class Label {
       }
 
       const container = Utils.createElement("div", {
-        "class": "jb-peek-container"
+        "class": "jb-peek-container",
+        "style": "pointer-events: none"
       });
 
       const label = Utils.createElement("div", {
@@ -62,6 +63,8 @@ export class Label {
       img.parentNode?.insertBefore(container, img);
       container.appendChild(img);
       container.appendChild(label);
+      container.style.width = window.getComputedStyle(container.parentElement as HTMLElement).getPropertyValue("width");
+      container.style.height = window.getComputedStyle(container.parentElement as HTMLElement).getPropertyValue("height");
     });
   }
 
