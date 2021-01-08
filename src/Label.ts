@@ -1,8 +1,13 @@
 import { DefaultConfig } from "./DefaultConfig";
 import * as Utils from "./Utils";
 
-type PlacementX = "left" | "center" | "right";
-type PlacementY = "top" | "bottom";
+const XPlacements = ["left", "center", "right"] as const;
+type PlacementXTuple = typeof XPlacements;
+type PlacementX = PlacementXTuple[number];
+
+const YPlacements = ["top", "bottom"] as const;
+type PlacementYTuple = typeof YPlacements;
+type PlacementY = PlacementYTuple[number];
 
 export interface IPlacementObject {
   x: PlacementX;
@@ -79,10 +84,10 @@ export class Label {
           result.y = convertedPlacement.y;
         }
       } else {
-        if (placement.x === "left" || placement.x === "center" || placement.x === "right") {
+        if (XPlacements.includes(placement.x)) {
           result.x = placement.x;
         }
-        if (placement.y === "top" || placement.y === "bottom") {
+        if (YPlacements.includes(placement.y)) {
           result.y = placement.y;
         }
       }
@@ -94,10 +99,10 @@ export class Label {
     const values = Utils.splitAttr(placement);
     if (values.size === 2) {
       let placementX, placementY;
-      values.forEach((value) => {
-        if (value === "left" || value === "center" || value === "right") {
+      values.forEach((value: any) => {
+        if (XPlacements.includes(value)) {
           placementX = value;
-        } else if (value === "top" || value === "bottom") {
+        } else if (YPlacements.includes(value)) {
           placementY = value;
         }
       });
