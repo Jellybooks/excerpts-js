@@ -28,7 +28,7 @@ export class Label {
 
   constructor(config?: ILabelConfig) {
     this.globalPlacement = this.handleGlobalPlacement(config?.placement);
-    this.text = config?.text || DefaultConfig.PEEK_TEXT;
+    this.text = config?.text || DefaultConfig.LABEL_TEXT;
 
     if (config?.selector) {
       this.elements = document.querySelectorAll(config.selector);
@@ -41,11 +41,11 @@ export class Label {
 
   private create() {
     this.elements.forEach(img => {
-      let peekPlacement: IPlacementObject = this.globalPlacement; 
+      let labelPlacement: IPlacementObject = this.globalPlacement; 
       const placementAttr = this.checkPlacementAttr(img);
       if (placementAttr !== null) {
-        peekPlacement.x = placementAttr.x;
-        peekPlacement.y = placementAttr.y;
+        labelPlacement.x = placementAttr.x;
+        labelPlacement.y = placementAttr.y;
       }
 
       const container = Utils.createElement("div", {
@@ -54,16 +54,16 @@ export class Label {
       });
 
       const label = Utils.createElement("div", {
-        "class": `jb-peek-label ${peekPlacement.x} ${peekPlacement.y}`
+        "class": `jb-peek-label ${labelPlacement.x} ${labelPlacement.y}`
       });
 
-      const peekText: string = img.getAttribute(DefaultConfig.PREVIEW_TEXT_ATTR) || this.text;
+      const labelText: string = img.getAttribute(DefaultConfig.PREVIEW_TEXT_ATTR) || this.text;
 
-      const labelText = Utils.createElement("span", {
+      const textLabel = Utils.createElement("span", {
         "class": "jb-peek-label-text"
-      }, peekText);
+      }, labelText);
   
-      label.appendChild(labelText);
+      label.appendChild(textLabel);
 
       img.parentNode?.insertBefore(container, img);
       container.appendChild(img);

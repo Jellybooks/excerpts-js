@@ -2,11 +2,11 @@ import { ILabelConfig, Label } from "./Label";
 import { IModalConfig, Modal } from "./Modal";
 
 interface IOptions {
-  peek?: ILabelConfig;
+  label?: ILabelConfig;
   modal?: IModalConfig;
 }
 
 export const init = (config?: IOptions) => {
-  new Label(config?.peek);
+  new Label(config?.label);
   new Modal(config?.modal);
 }
