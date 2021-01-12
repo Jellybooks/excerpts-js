@@ -143,6 +143,48 @@ describe("Label", () => {
     expect(label.className).to.contain("left");
   });
 
+  it("should handle a missing placement axis and fallback on default", () => {
+    const html = `<!doctype HTML><html>
+    <body>
+      <div>
+        <a data-jb-modal href="http://www.test.org">
+          <img data-jb-label data-jb-label-placement="bottom" src="http://www.test.org/image.jpg" alt="" />
+        </a>
+      </div>
+    </body>
+  </html>`;
+      const { window } = new JSDOM(html);
+      global.document = window.document;
+  
+      new Label();
+  
+      const img = document.querySelector("img") as HTMLImageElement;
+      const label = img.nextElementSibling as HTMLElement;
+      expect(label.className).to.contain(DefaultConfig.PLACEMENT_OBJECT.x);
+      expect(label.className).to.contain("bottom");
+  });
+
+  it("should ignore non-conformant placement values (more than 2 in string)", () => {
+    const html = `<!doctype HTML><html>
+    <body>
+      <div>
+        <a data-jb-modal href="http://www.test.org">
+          <img data-jb-label data-jb-label-placement="bottom left top" src="http://www.test.org/image.jpg" alt="" />
+        </a>
+      </div>
+    </body>
+  </html>`;
+      const { window } = new JSDOM(html);
+      global.document = window.document;
+  
+      new Label();
+  
+      const img = document.querySelector("img") as HTMLImageElement;
+      const label = img.nextElementSibling as HTMLElement;
+      expect(label.className).to.contain(DefaultConfig.PLACEMENT_OBJECT.x);
+      expect(label.className).to.contain(DefaultConfig.PLACEMENT_OBJECT.y);
+  });
+
   it("should prioritize the attribute over the JS config", () => {
     const html = `<!doctype HTML><html>
   <body>
