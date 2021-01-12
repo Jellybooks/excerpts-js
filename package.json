@@ -9,7 +9,7 @@
     "pretest": "tsc -p tsconfig.spec.json",
     "test": "mocha --require jsdom-global/register --recursive lib/test",
     "posttest": "rimraf lib/**",
-    "clean": "rimraf node_modules dev"
+    "clean": "rimraf node_modules dev lib"
   },
   "author": "Jellybooks",
   "license": "ISC",
