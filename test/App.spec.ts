@@ -1,6 +1,7 @@
 import { expect } from "chai";
 import { JSDOM } from "jsdom";
 
+import { DefaultConfig } from "../src/DefaultConfig";
 import * as peekInside from "../src/index";
 
 describe("App", () => {
@@ -38,12 +39,12 @@ describe("App", () => {
     const label = img.nextElementSibling as HTMLElement;
     expect(label).not.to.be.null;
     expect(label.className).to.contain("jb-peek-label");
-    expect(label.className).to.contain("top");
-    expect(label.className).to.contain("right");
+    expect(label.className).to.contain(DefaultConfig.PLACEMENT_OBJECT.x);
+    expect(label.className).to.contain(DefaultConfig.PLACEMENT_OBJECT.y);
 
     const labelText = label.querySelector(".jb-peek-label-text") as HTMLElement;
     expect(labelText).not.to.be.null;
-    expect(labelText.textContent).to.equal("Peek Inside");
+    expect(labelText.textContent).to.equal(DefaultConfig.LABEL_TEXT);
 
     const modalContainer = document.querySelector(".jb-modal-container") as HTMLDivElement;
     expect(modalContainer).not.to.be.null;

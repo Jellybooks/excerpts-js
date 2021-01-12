@@ -1,6 +1,7 @@
 import { expect } from "chai";
 import { JSDOM } from "jsdom";
 
+import { DefaultConfig } from "../src/DefaultConfig";
 import { Label } from "../src/Label";
 
 describe("Label", () => {
@@ -30,12 +31,12 @@ describe("Label", () => {
     const label = img.nextElementSibling as HTMLElement;
     expect(label).not.to.be.null;
     expect(label.className).to.contain("jb-peek-label");
-    expect(label.className).to.contain("top");
-    expect(label.className).to.contain("right");
+    expect(label.className).to.contain(DefaultConfig.PLACEMENT_OBJECT.x);
+    expect(label.className).to.contain(DefaultConfig.PLACEMENT_OBJECT.y);
 
     const labelText = label.querySelector(".jb-peek-label-text") as HTMLElement;
     expect(labelText).not.to.be.null;
-    expect(labelText.textContent).to.equal("Peek Inside");
+    expect(labelText.textContent).to.equal(DefaultConfig.LABEL_TEXT);
   });
 
   it("should handle the configured selector", () => {
@@ -64,12 +65,12 @@ describe("Label", () => {
     const label = img.nextElementSibling as HTMLElement;
     expect(label).not.to.be.null;
     expect(label.className).to.contain("jb-peek-label");
-    expect(label.className).to.contain("top");
-    expect(label.className).to.contain("right");
+    expect(label.className).to.contain(DefaultConfig.PLACEMENT_OBJECT.x);
+    expect(label.className).to.contain(DefaultConfig.PLACEMENT_OBJECT.y);
 
     const labelText = label.querySelector(".jb-peek-label-text") as HTMLElement;
     expect(labelText).not.to.be.null;
-    expect(labelText.textContent).to.equal("Peek Inside");
+    expect(labelText.textContent).to.equal(DefaultConfig.LABEL_TEXT);
   });
 
   it("should handle the configured text", () => {
