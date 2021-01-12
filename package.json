@@ -8,7 +8,7 @@
     "build:dev": "webpack --config webpack.dev.js && cpx src/peek-inside.css dev/",
     "pretest": "tsc -p tsconfig.spec.json",
     "test": "mocha --require jsdom-global/register --recursive lib/test",
-    "posttest": "rimraf lib",
+    "posttest": "rimraf lib/**",
     "clean": "rimraf node_modules dev"
   },
   "author": "Jellybooks",
