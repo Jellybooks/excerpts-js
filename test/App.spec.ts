@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { JSDOM } from "jsdom";
 
 import { DefaultConfig } from "../src/DefaultConfig";
-import * as peekInside from "../src/index";
+import * as excerpts from "../src/index";
 
 describe("App", () => {
   Object.defineProperty(window, "matchMedia", {
@@ -28,7 +28,7 @@ describe("App", () => {
     const { window } = new JSDOM(html);
     global.document = window.document;
 
-    peekInside.init();
+    excerpts.init();
 
     const img = document.querySelector("img") as HTMLImageElement;
     const labelContainer = img.parentElement as HTMLElement;
@@ -63,7 +63,7 @@ describe("App", () => {
     const { window } = new JSDOM(html);
     global.document = window.document;
 
-    peekInside.init({
+    excerpts.init({
       label: {
         selector: ".jb-modal-label",
         text: "Preview",

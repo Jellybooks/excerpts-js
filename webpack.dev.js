@@ -13,7 +13,7 @@ const legacyConfig = {
   output: {
     filename: "peek-inside.es5.js",
     path: __dirname + "/dev",
-    library: "peekInside",
+    library: "excerpts",
     libraryTarget: "var"
   },
   module: {
@@ -44,7 +44,7 @@ const modernConfig = {
   output: {
     filename: "peek-inside.js",
     path: __dirname + "/dev",
-    library: "peekInside",
+    library: "excerpts",
     libraryTarget: "var"
   },
   module: {

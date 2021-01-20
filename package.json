@@ -2,7 +2,7 @@
   "name": "peek-inside-js",
   "version": "1.0.0-beta.2",
   "description": "A small script to create modals to peek inside samples",
-  "main": "peek-inside.js",
+  "main": "src/index.ts",
   "scripts": {
     "build": "webpack --config webpack.prod.js && cpx src/peek-inside.css dist/",
     "build:dev": "webpack --config webpack.dev.js && cpx src/peek-inside.css dev/",
