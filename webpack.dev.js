@@ -11,7 +11,7 @@ const commonConfig = {
 const legacyConfig = {
   name: "legacy",
   output: {
-    filename: "peek-inside.es5.js",
+    filename: "excerpts.es5.js",
     path: __dirname + "/dev",
     library: "excerpts",
     libraryTarget: "var"
@@ -42,7 +42,7 @@ const legacyConfig = {
 const modernConfig = {
   name: "modern",
   output: {
-    filename: "peek-inside.js",
+    filename: "excerpts.js",
     path: __dirname + "/dev",
     library: "excerpts",
     libraryTarget: "var"

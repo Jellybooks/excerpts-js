@@ -1,4 +1,4 @@
-# peek-inside-js
+# excerpts-js
 
 A small script to create modals to peek inside samples
 
