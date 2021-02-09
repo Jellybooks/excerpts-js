@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js && cpx src/excerpts.css dist/",
     "build:dev": "webpack --config webpack.dev.js && cpx src/excerpts.css dev/",
+    "build:all": "npm run build:dev && npm run build",
     "pretest": "tsc -p tsconfig.spec.json",
     "test": "mocha --require jsdom-global/register --recursive lib/test",
     "posttest": "rimraf lib/**",
