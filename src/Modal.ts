@@ -90,6 +90,7 @@ export class Modal {
       this.modalContainer?.classList.remove("jb-modal-hidden");
       this.modalContainer?.removeAttribute("hidden");
       this.modal?.removeAttribute("aria-hidden");
+      document.body.style.overflow = "hidden";
     }
   }
 
@@ -97,6 +98,7 @@ export class Modal {
     this.modalContainer?.classList.add("jb-modal-hidden");
     this.modalContainer?.setAttribute("hidden", "true");
     this.modal?.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
   }
 
   private handleMobileQuery(): void {

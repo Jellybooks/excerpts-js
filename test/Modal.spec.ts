@@ -69,6 +69,7 @@ describe("Modal", () => {
     expect(modalContainer.hasAttribute("hidden")).to.be.false;
     expect(modal.hasAttribute("aria-hidden")).to.be.false;
     expect(iframe.src).to.equal("http://www.test.org/");
+    expect(document.body.style.overflow).to.equal("hidden");
   });
 
   it("should close the modal", () => {
@@ -106,6 +107,7 @@ describe("Modal", () => {
     expect(modalContainer.className).to.contain("jb-modal-hidden");
     expect(modalContainer.hasAttribute("hidden")).to.be.true;
     expect(modal.hasAttribute("aria-hidden")).to.be.true;
+    expect(document.body.style.overflow).to.not.equal("hidden");
   });
 
   it("should handle the configured selector", () => {
