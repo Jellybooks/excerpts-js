@@ -86,7 +86,7 @@ export class Modal {
       event.preventDefault();
       event.stopPropagation();
 
-      this.iframe.src = target.href;
+      this.iframe.src = Utils.addParamToUrl(target.href, "embedded", "true");
       this.modalContainer?.classList.remove("jb-modal-hidden");
       this.modalContainer?.removeAttribute("hidden");
       this.modal?.removeAttribute("aria-hidden");
