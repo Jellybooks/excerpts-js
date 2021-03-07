@@ -68,7 +68,7 @@ describe("Modal", () => {
     expect(modalContainer.className).not.to.contain("jb-modal-hidden");
     expect(modalContainer.hasAttribute("hidden")).to.be.false;
     expect(modal.hasAttribute("aria-hidden")).to.be.false;
-    expect(iframe.src).to.equal("http://www.test.org/");
+    expect(iframe.src).to.equal("http://www.test.org/?embedded=true");
     expect(document.body.style.overflow).to.equal("hidden");
   });
 
@@ -86,7 +86,7 @@ describe("Modal", () => {
     expect(modalContainer.className).not.to.contain("jb-modal-hidden");
     expect(modalContainer.hasAttribute("hidden")).to.be.false;
     expect(modal.hasAttribute("aria-hidden")).to.be.false;
-    expect(iframe.src).to.equal("http://www.test.org/");
+    expect(iframe.src).to.equal("http://www.test.org/?embedded=true");
 
     const closeButton = modalContainer.querySelector("button.jb-modal-close") as HTMLButtonElement;
     closeButton.click();
@@ -132,7 +132,7 @@ describe("Modal", () => {
     const anchor = document.querySelector("a") as HTMLAnchorElement;
     anchor.click();
 
-    expect(iframe.src).to.equal("http://www.test.org/");
+    expect(iframe.src).to.equal("http://www.test.org/?embedded=true");
   });
 
   it("should handle multiple anchors", () => {
@@ -140,7 +140,7 @@ describe("Modal", () => {
   <body>
     <div>
       <a data-jb-modal href="http://www.test.org">Read Preview</a>
-      <a data-jb-modal href="http://test.org">Read Another Preview</a>
+      <a data-jb-modal href="http://test.org?hello=world">Read Another Preview</a>
     </div>
   </body>
 </html>`;
@@ -157,12 +157,12 @@ describe("Modal", () => {
 
     anchor[0].click();
 
-    expect(iframe.src).to.equal("http://www.test.org/");
+    expect(iframe.src).to.equal("http://www.test.org/?embedded=true");
 
     closeButton.click();
 
     anchor[1].click();
 
-    expect(iframe.src).to.equal("http://test.org/");
+    expect(iframe.src).to.equal("http://test.org/?hello=world&embedded=true");
   });
 })

@@ -63,4 +63,18 @@ describe("Utils", () => {
       expect(el.textContent).to.equal("Hello World!");
     });
   });
+
+  describe("Appending Parameters to URL", () => {
+    it("should add a parameter", () => {
+      const src = "http://www.test.org";
+      const url = Utils.addParamToUrl(src, "embedded", "true");
+      expect(url).to.equal("http://www.test.org/?embedded=true");
+    });
+
+    it("should append if there is one already", () => {
+      const src = "http://www.test.org?hello=world";
+      const url = Utils.addParamToUrl(src, "embedded", "true");
+      expect(url).to.equal("http://www.test.org/?hello=world&embedded=true");
+    });
+  });
 });
