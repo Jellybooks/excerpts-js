@@ -1,6 +1,6 @@
 {
   "name": "excerpts-js",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "A small script to create modals to peek inside samples",
   "main": "src/index.ts",
   "scripts": {
