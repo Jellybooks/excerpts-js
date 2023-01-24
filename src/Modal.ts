@@ -4,6 +4,7 @@ import * as Utils from "./Utils";
 export interface IModalConfig {
   selector?: string;
   showOnMobile?: boolean;
+  positioning?: "left" | "right";
 }
 
 export class Modal {
@@ -17,46 +18,57 @@ export class Modal {
   private closeButton: HTMLButtonElement | null = null;
   private overlay: HTMLDivElement | null = null;
   private iframe: HTMLIFrameElement | null = null;
-
+  private positioning?: "left" | "right";
   constructor(config?: IModalConfig) {
     this.showOnMobile = config?.showOnMobile || false;
-    
+
     if (config?.selector) {
       this.elements = document.querySelectorAll(config.selector);
     } else {
       this.elements = document.querySelectorAll(DefaultConfig.MODAL_SELECTOR);
     }
-    
+    if (config?.positioning) {
+      this.positioning = config.positioning;
+    }
+
     this.create();
     this.setupEvents();
   }
 
   private create(): void {
     this.modalContainer = Utils.createElement("div", {
-      "class": "jb-modal-container jb-modal-hidden",
-      "hidden": "true"
+      class: "jb-modal-container jb-modal-hidden",
+      hidden: "true",
     }) as HTMLDivElement;
 
     this.modal = Utils.createElement("div", {
-      "class": "jb-modal",
-      "role": "dialog",
+      class: "jb-modal",
+      role: "dialog",
       "aria-label": "excerpt",
-      "aria-hidden": "true"
+      "aria-hidden": "true",
     }) as HTMLDivElement;
 
-    this.closeButton = Utils.createElement("button", {
-      "type": "button",
-      "class": "jb-modal-close",
-      "aria-label": "Close Excerpt"
-    }, "x") as HTMLButtonElement;
+    if (this.positioning) {
+      this.modal.classList.add("jb-" + this.positioning);
+    }
+
+    this.closeButton = Utils.createElement(
+      "button",
+      {
+        type: "button",
+        class: "jb-modal-close",
+        "aria-label": "Close Excerpt",
+      },
+      "x"
+    ) as HTMLButtonElement;
 
     this.overlay = Utils.createElement("div", {
-      "class": "jb-modal-overlay",
-      "tabindex": "-1"
+      class: "jb-modal-overlay",
+      tabindex: "-1",
     }) as HTMLDivElement;
 
     this.iframe = Utils.createElement("iframe", {
-      "src": "about:blank",
+      src: "about:blank",
     }) as HTMLIFrameElement;
 
     this.modal.appendChild(this.closeButton);
@@ -65,13 +77,13 @@ export class Modal {
     this.modalContainer.appendChild(this.modal);
     this.modalContainer.appendChild(this.overlay);
 
-    document.body.appendChild(this.modalContainer)
+    document.body.appendChild(this.modalContainer);
   }
 
   private setupEvents(): void {
-    this.elements.forEach(anchor => {
+    this.elements.forEach((anchor) => {
       anchor.addEventListener("click", this.open.bind(this));
-    })
+    });
     this.closeButton?.addEventListener("click", this.close.bind(this));
     this.overlay?.addEventListener("click", this.close.bind(this));
     this.handleMobileQuery();
@@ -109,6 +121,6 @@ export class Modal {
       } else {
         this.isMobile = false;
       }
-    })
+    });
   }
 }
