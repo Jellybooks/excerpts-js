@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Excerpts Integration JS</title>
+    <style>
+        html {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        body {
+            margin: 0 auto;
+            max-width: 60rem;
+        }
+        .book-container {
+            display: flex;
+            margin: 6rem 0 0 0;
+        }
+        .cover {
+            margin-left: 2rem;
+            height: 500px;
+        }
+        .cover a {
+            height: 100%;
+        }
+        .cover img {
+            height: 100%;
+        }
+        h1 {
+            margin: 0;
+        }
+        h1+p {
+            margin: 0;
+        }
+        h2 {
+            margin: 0 0 2rem 0;
+        }
+        .modal-button-container {
+            margin: 4rem 0 0 0;
+            text-align: center;
+        }
+        .modal-button {
+            background-color: blueviolet;
+            color: white;
+            border-radius: 0.25rem;
+            padding: 1rem;
+            text-decoration: none;
+        }
+    </style>
+    <link rel="stylesheet" href="../dist/excerpts-1.0-beta.css" />
+</head>
+
+<body>
+<header>
+    <h1>My BookShoppe</h1>
+    <p>Find your next read!</p>
+</header>
+<section class="book-container">
+    <div class="description">
+        <h2>My Sister the Serial Killer</h2>
+
+        <p>"Femi makes three you know. Three and they label you a serial killer."</p>
+
+            <p>When Korede's dinner is interrupted one night by a distress call from her sister, Ayoola, she knows what's expected of her: bleach, rubber gloves, nerves of steel and a strong stomach. This'll be the third boyfriend Ayoola's dispatched in, quote, self-defence and the third mess that her lethal little sibling has left Korede to clear away. She should probably go to the police for the good of the menfolk of Nigeria, but she loves her sister and, as they say, family always comes first. Until, that is, Ayoola starts dating the fit doctor where Korede works as a nurse. Korede's long been in love with him, and isn't prepared to see him wind up with a knife in his back: but to save one would mean sacrificing the other...</p>
+
+        <p><b>Author:</b> Oyinkan Braithwaite</p>
+
+        <p><b>Publisher:</b> Atlantic Books</p>
+
+        <p><b>Publication Date:</b> 2019</p>
+
+        <p><b>Pages:</b> 240</p>
+    </div>
+
+    <div class="cover">
+        <a class="jb-modal-link" href="/cloud_reader/excerpts/my-sister-the-serial-killer_9781786495976-ex/L3Leb?utm_source=excerpt-integration-demo">
+            <img class="jb-peek-img" src="1c026351-c69b-46f7-8eed-231abaf732ff_20190603173022.jpg" />
+        </a>
+    </div>
+</section>
+<script src="../dist/excerpts-1.0-beta.js"></script>
+<script>
+    excerpts.init({
+        label: {
+            selector: ".jb-peek-img", // data-jb-peek
+            text: "Read Excerpt", // data-jb-peek-text
+            placement: {
+                x: "right",
+                y: "bottom"
+            } // data-jb-peek-placement
+        },
+        modal: {
+            selector: ".jb-modal-link" // data-jb-modal
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Proof of Concept: Excerpts within modal window</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+          integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        /* Override Foundation.css putting a border around code blocks. */
+        pre code {
+            border: none;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        pre.f {
+            font-size: 90%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="grid-container">
+
+    <h1>Jellybooks Excerpts Integration JS (a.k.a. excerpts.js)</h1>
+
+    <div style="float: right; font-weight: bold">Version: 1.0.0-beta</div>
+
+    <h2>Introduction</h2>
+
+    <p>For each partner, Jellybooks provides excerpt URLs that can be incorporated into your website(s), social-media
+        channels, email mailing-lists, etc.</p>
+
+    <p>Within a website context, because the excerpt is simply a URL, web-designers/developers have complete control of
+        how they wish to leverage the excerpt. However, Jellybooks has identified some core common features that website
+        owners are likely to employ, and therefore we’ve created this JavaScript library to simplify integration of
+        excerpts into existing product pages.</p>
+
+    <p>At Jellybooks we recognise that book product pages are structured and coded in many different ways. As a consequence
+        our Excerpts Integration library employs a flexible approach for extending your existing markup rather requiring
+        structural markup changes. The code examples shown in the developer guide are largely for illustration purposes
+        &mdash; it's highly likely that <em>your</em> integration will look slightly different because of your site's
+        existing markup. We have built a <a href="demo/index.html">demo page</a> to show a complete integration in action.
+    </p>
+
+    <h3>Modals</h3>
+
+    <p>Although excerpts will contain call-to-action links back to the partner's online presence (e.g. product buy page)
+        it is a common preference to display the excerpt in a modal from within the partner's site, where
+        appropriate.</p>
+
+    <p>This JavaScript library from Jellybooks makes it almost effortless to provide the reading experience from with a
+        modal, with the ability to customize.</p>
+
+    <p>You can have as many links to the excerpt as you wish -- they can be images or text -- and the JavaScript will
+        automatically handle the clicks so that the excerpt is presented within a modal.</p>
+
+    <!--<p>[GIF of modal in action]</p>-->
+
+    <h3>Covers + “Peek Inside” label</h3>
+
+    <p>Product pages typically already contain an image of the book cover. Customers wishing to “peek inside” may be
+        familiar with the cover itself being a link to a sample/preview. To increase awareness that the book has the
+        “peek inside” feature, then the JavaScript library can automatically attach a “Peek Inside” label to the
+        image.</p>
+
+    <!--<p>[Image showing before->after]</p>-->
+
+    <h2>Developer Guide</h2>
+
+    <h3>Download JS &amp; CSS</h3>
+    <ul>
+        <li>JavaScript: <a href="dist/excerpts-1.0-beta.js">excerpts-1.0-beta.js</a></li>
+        <li>CSS: <a href="dist/excerpts-1.0-beta.css">excerpts-1.0-beta.css</a></li>
+    </ul>
+
+    <h3>Installation</h3>
+
+    <p>Note: Different websites and platforms likely have their own preferred way of including CSS and JS assets. Your site's
+    developer(s) will know how to include the assets appropriately.</p>
+
+    <p>The most basic install is to simply load the CSS and JS in the <code>head</code> tag and point the hrefs to the
+    location of the assets as stored on your site's server.</p>
+
+    <p>Load the CSS file.</p>
+    <pre class="f"><code class="language-html">&lt;link href="/path/to/excerpts.css" rel="stylesheet" /&gt;</code></pre>
+
+    <p>Load the JS file.</p>
+    <pre class="f"><code class="language-html">&lt;script src="/path/to/excerpts.js"&gt;&lt;/script&gt;</code></pre>
+
+
+    <h3>Modals</h3>
+
+    <p>Annotate relevant links with the <code>data-jb-modal</code> attribute.</p>
+
+    <pre class="f"><code class="language-html">&lt;a data-jb-modal href="{url_to_excerpt}"&gt;Read Excerpt&lt;/a&gt;</code></pre>
+
+    <p>The JS will listen for clicks on any link element where the <code>data-jb-modal</code> is present. A modal will appear containing the excerpt within the Jellybooks Cloud Reader.</p>
+
+    <p>The <code>{url_to_excerpt}</code> is the URL of your custom excerpt hosted by Jellybooks. URLs are obtained via the Partner
+        Portal or API. (E.g <a href="https://www.jellybooks.com/cloud_reader/excerpts/ulysses_9780241243626-ex/L3Leb">https://www.jellybooks.com/cloud_reader/excerpts/ulysses_9780241243626-ex/L3Leb</a>)</p>
+
+    <h3>Selector</h3>
+
+    <p>Some integrators would prefer to use a different attribute, or potentially a class. To change the default selector from <code>data-jb-modal</code>, use
+        <code>excerpts.init()</code> to set the selector option. E.g. if the link is annotated with a class called "<code>excerpt_link</code>":</p>
+
+    <pre class="f"><code class="language-html">&lt;a class="excerpt_link" href="{url_to_excerpt}"&gt;Read Excerpt&lt;/a&gt;</code></pre>
+
+    <p>Then you can override the modal selector as follows:</p>
+
+    <pre class="f"><code class="language-html">&lt;script&gt;
+excerpts.init({
+  "modal": {
+    "selector": "a.excerpt_link"
+  }
+});
+&lt;/script&gt;</code></pre>
+
+    <p>The selector must conform to <code>Element.querySelectorAll()</code> syntax.</p>
+
+    <p>Note: The <code>{url_to_excerpt}</code> is the URL of your custom excerpt hosted by Jellybooks. URLs are obtained via the Partner
+        Portal or API. (E.g <a href="https://www.jellybooks.com/cloud_reader/excerpts/ulysses_9780241243626-ex/L3Leb">https://www.jellybooks.com/cloud_reader/excerpts/ulysses_9780241243626-ex/L3Leb</a>)</p>
+
+
+    <h3>Mobile</h3>
+
+    <p>Modals work well on larger screens, but become awkward for smaller form factors, especially mobile phones. Therefore, by default we follow the convention of not using the modal for smaller, mobile screens, and simply follow the link and allow the user to use the back gesture/button to return to the product page.</p>
+
+    <p>To disable this behavior, and show the modal on all devices change the "<code>show_on_mobile</code>" option.</p>
+
+    <pre class="f"><code class="language-html">&lt;script&gt;
+excerpts.init({
+  "modal": {
+    "show_on_mobile": true
+  }
+});
+&lt;/script&gt;</code></pre>
+
+
+<h2>Peek Inside label</h2>
+
+    <p>To apply the “peek inside” label, add the <code>data-jb-label</code> attribute to the element containing the cover. E.g.,</p>
+
+
+    <pre class="f"><code class="language-html">&lt;img data-jb-label src="/path/to/cover.jpg" /&gt;</code></pre>
+
+    <p>Note: it’s still necessary to enclose the cover with the hyperlink to the excerpt. Otherwise the cover will show a peek inside label but nothing will happen when clicked/pressed, i.e.</p>
+
+    <pre class="f"><code class="language-html">&lt;a data-jb-modal href="{url_to_excerpt}"&gt;&lt;img data-jb-label src="/path/to/cover.jpg" /&gt;&lt;/a&gt;</code></pre>
+
+
+<h3>Selector</h3>
+
+    <p>To change the selector that identifies the image, use the <code>label.selector</code> option. E.g., to look for images with the "<code>peek_inside</code>" class:</p>
+    <pre class="f"><code class="language-js">excerpts.init({
+  "label": {
+    "selector": "img.peek_inside"
+  }
+});</code></pre>
+
+    <p>The selector must conform to <code>Element.querySelectorAll()</code> syntax.</p>
+
+    <h3>Label text</h3>
+
+    <p>You can customise the text of the label via the <code>data-jb-label-text</code> attribute or the <code>label.text</code> option.</p>
+
+    <pre class="f"><code class="language-html">&lt;img data-jb-label data-jb-label-text="View preview" src="cover.jpg" /&gt;</code></pre>
+
+    <pre class="f"><code class="language-js">excerpts.init({
+  "label": {
+    "text": "View preview"
+  }
+});</code></pre>
+
+    <h3>Position</h3>
+
+<p>It’s possible to specify whether the label appears above or below the image, and whether the label is aligned left, centre, or right. These are configured via the
+    the <code>label.placement</code> option.</p>
+    
+<p>Its value can either be a string:</p>
+
+
+<pre class="f"><code class="language-js">excerpts.init({
+  "label": {
+    "placement": "top right"
+  }
+});</code></pre>
+
+<p>Or an object:</p>
+
+<pre class="f"><code class="language-js">excerpts.init({
+    "label": {
+      "placement": {
+          "x": "right",
+          "y": "top"
+      }
+    }
+  });</code></pre>
+
+    <p>Alternatively you can set it via the <code>data-jb-label-placement</code> attribute:</p>
+
+    <pre class="f"><code class="language-html">&lt;img data-jb-label data-jb-label-placement="top right" src="cover.jpg" /&gt;</code></pre>
+
+    <p>Valid values:</p>
+
+    <table>
+        <tr>
+            <td><code>x-axis (horizontal)</code></td>
+            <td><code>left|center|right</code></td>
+        </tr>
+        <tr>
+            <td><code>y-axis (vertical)</code></td>
+            <td><code>top|bottom</code></td>
+        </tr>
+    </table>
+
+    <p>Note: the label data attributes will override the <code>label</code> configuration in <code>excerpts.init()</code> in case both are used.</p>
+
+<h3>Style</h3>
+
+<p>It’s possible to customise the styling of the label using CSS. The label is markup as follows:</p>
+
+<pre class="f"><code class="language-html">&lt;div class="jb-peek-label"&gt;
+    &lt;span class="jb-peek-label-text">Peek inside&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+
+    <h3>Demo</h3>
+    <p>
+        View our <a href="demo/index.html">Demo page</a> to see the modal integration in action.
+    </p>
+
+</div>
+</body>
+</html>
