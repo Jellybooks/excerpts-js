@@ -4,7 +4,7 @@ import * as Utils from "./Utils";
 export interface IModalConfig {
   selector?: string;
   showOnMobile?: boolean;
-  positioning?: "left" | "right";
+  positioning?: "left" | "right" | "center";
 }
 
 export class Modal {
@@ -18,7 +18,7 @@ export class Modal {
   private closeButton: HTMLButtonElement | null = null;
   private overlay: HTMLDivElement | null = null;
   private iframe: HTMLIFrameElement | null = null;
-  private positioning?: "left" | "right";
+  private positioning: "left" | "right" | "center";
   constructor(config?: IModalConfig) {
     this.showOnMobile = config?.showOnMobile || false;
 
@@ -29,6 +29,8 @@ export class Modal {
     }
     if (config?.positioning) {
       this.positioning = config.positioning;
+    } else {
+      this.positioning = "center";
     }
 
     this.create();
