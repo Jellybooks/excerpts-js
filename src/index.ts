@@ -9,4 +9,4 @@ interface IOptions {
 export const init = (config?: IOptions) => {
   new Label(config?.label);
   new Modal(config?.modal);
-}
+};

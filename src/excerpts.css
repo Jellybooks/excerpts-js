@@ -9,6 +9,22 @@
   height: 80vh;
   position: fixed;
 }
+
+.jb-modal.jb-left {
+  left: 1vw;
+  top: 3vh;
+  width: 49%;
+  height: 96vh;
+}
+
+.jb-modal.jb-right {
+  right: 3vw;
+  left: auto;
+  top: 3vh;
+  width: 49%;
+  height: 96vh;
+}
+
 .jb-modal iframe {
   box-sizing: border-box;
   width: 100%;
@@ -24,7 +40,7 @@
   position: absolute;
   padding: 0.25rem 1rem 0.5rem;
   border: 0.0625rem solid #000000;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   font-weight: bold;
   display: inline-block;
   line-height: 1;
@@ -56,7 +72,7 @@
   right: -2rem;
   font-size: 2rem;
   border: 0.0625rem solid #000000;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   font-family: inherit;
   padding: 0.25rem 1rem 0.5rem;
   cursor: pointer;
