@@ -95,7 +95,8 @@ export class Modal {
     if (this.isMobile && !this.showOnMobile) {
       return;
     }
-    const target = event.target as HTMLAnchorElement;
+
+    const target = event.currentTarget as HTMLAnchorElement;
     if (this.iframe && target.href) {
       event.preventDefault();
       event.stopPropagation();

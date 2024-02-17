@@ -8,7 +8,7 @@ describe("Modal", () => {
     const html = `<!doctype HTML><html>
   <body>
     <div>
-      <a data-jb-modal href="http://www.test.org">Read Preview</a>
+      <a data-jb-modal href="http://www.test.org"><span>Read Preview</span></a>
     </div>
   </body>
 </html>`;
@@ -58,7 +58,7 @@ describe("Modal", () => {
   it("should open the modal", () => {
     new Modal();
 
-    const anchor = document.querySelector("a")  as HTMLAnchorElement;
+    const anchor = document.querySelector("a span")  as HTMLAnchorElement;
     anchor.click();
 
     const modalContainer = document.querySelector(".jb-modal-container") as HTMLDivElement;
