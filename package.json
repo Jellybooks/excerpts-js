@@ -1,7 +1,11 @@
 {
   "name": "excerpts-js",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.1",
   "description": "A small script to create modals to peek inside samples",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jellybooks/excerpts-js"
+  },
   "main": "src/index.ts",
   "scripts": {
     "build": "webpack --config webpack.prod.js && cpx src/excerpts.css dist/",
