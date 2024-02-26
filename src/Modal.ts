@@ -89,6 +89,12 @@ export class Modal {
     this.closeButton?.addEventListener("click", this.close.bind(this));
     this.overlay?.addEventListener("click", this.close.bind(this));
     this.handleMobileQuery();
+    const iframe = this.iframe
+    if (iframe) {
+      iframe.addEventListener("load", function () {
+        iframe.focus()
+      })
+    }
   }
 
   private open(event: MouseEvent): void {
@@ -100,7 +106,7 @@ export class Modal {
     if (this.iframe && target.href) {
       event.preventDefault();
       event.stopPropagation();
-
+      
       this.iframe.src = Utils.addParamToUrl(target.href, "embedded", "true");
       this.modalContainer?.classList.remove("jb-modal-hidden");
       this.modalContainer?.removeAttribute("hidden");
