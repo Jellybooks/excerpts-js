@@ -1,11 +1,11 @@
 import { DefaultConfig } from "./DefaultConfig";
 import * as Utils from "./Utils";
 
-const XPlacements = ["left", "center", "right"] as const;
+const XPlacements = ["left", "center", "right", "left-outside", "right-outside", "left-edge", "right-edge"] as const;
 type PlacementXTuple = typeof XPlacements;
 type PlacementX = PlacementXTuple[number];
 
-const YPlacements = ["top", "bottom"] as const;
+const YPlacements = ["top", "bottom", "vertical-center", "top-outside", "bottom-outside", "top-edge", "bottom-edge"] as const;
 type PlacementYTuple = typeof YPlacements;
 type PlacementY = PlacementYTuple[number];
 
@@ -17,19 +17,20 @@ export interface IPlacementObject {
 export interface ILabelConfig {
   selector?: string;
   text?: string;
+  style?: "button" | "sticker";
   placement?: string | IPlacementObject;
 }
 
 export class Label {
   private globalPlacement: IPlacementObject;
   private text: string;
-
+  private style: string = "button";
   private elements: NodeListOf<HTMLImageElement>;
 
   constructor(config?: ILabelConfig) {
     this.globalPlacement = this.handleGlobalPlacement(config?.placement);
     this.text = config?.text || DefaultConfig.LABEL_TEXT;
-
+    this.style = config?.style || this.style;
     if (config?.selector) {
       this.elements = document.querySelectorAll(config.selector);
     } else {
@@ -54,7 +55,7 @@ export class Label {
       });
 
       const label = Utils.createElement("div", {
-        "class": `jb-peek-label ${labelPlacement.x} ${labelPlacement.y}`
+        "class": `jb-peek-label ${labelPlacement.x} ${labelPlacement.y} ${this.style}`
       });
 
       const labelText: string = img.getAttribute(DefaultConfig.PREVIEW_TEXT_ATTR) || this.text;

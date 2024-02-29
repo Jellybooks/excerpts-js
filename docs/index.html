@@ -368,13 +368,28 @@ excerpts.init({
       <table>
         <tr>
           <td><code>x-axis (horizontal)</code></td>
-          <td><code>left|center|right</code></td>
+          <td>
+            <code
+              >left|center|right|left-outside|right-outside|left-edge|right-edge</code
+            >
+          </td>
         </tr>
         <tr>
           <td><code>y-axis (vertical)</code></td>
-          <td><code>top|bottom</code></td>
+          <td>
+            <code
+              >top|bottom|vertical-center|top-outside|bottom-outside|top-edge|bottom-edge</code
+            >
+          </td>
         </tr>
       </table>
+
+      <p>
+        The <code>-outside</code> and <code>-edge</code> values for both the
+        horizontal and vertical position axes the button either outside the
+        image (for <code>-outside</code>), hugging its edge, or jutting halfway
+        out of the image (for <code>-edge</code>).
+      </p>
 
       <p>
         Note: the label data attributes will override the
@@ -394,6 +409,37 @@ excerpts.init({
       ><code class="language-html">&lt;div class="jb-peek-label"&gt;
     &lt;span class="jb-peek-label-text">Peek inside&lt;/span&gt;
 &lt;/div&gt;</code></pre>
+
+      <p>
+        Additionally, <code>excerpts.js</code> comes with two built-in styles,
+        <code>button</code> and <code>sticker</code>.
+      </p>
+
+      <p>
+        A non-exhaustive selection of the various positioning and style options.
+      </p>
+      <p>
+        <img
+          src="button-edge-position.png"
+          alt="Button style on the edge of the border"
+        />
+        <img
+          src="button-outside-position.png"
+          alt="Button style outside the image"
+        />
+        <img
+          src="sticker-center-edge.png"
+          alt="Sticker style vertically centered on the edge"
+        />
+        <img
+          src="sticker-top-center-edge.png"
+          alt="Sticker tyle horizontally centered on the top edge"
+        />
+        <img
+          src="sticker-top-center-outside.png"
+          alt="Sticker tyle horizontally centered on the top outside the cover"
+        />
+      </p>
 
       <h3>Demo</h3>
       <p>
